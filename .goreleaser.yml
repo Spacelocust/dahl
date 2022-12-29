@@ -1,0 +1,73 @@
+env:
+  - CGO_ENABLED=0
+
+builds:
+  - binary: dahl
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+      - arm
+      - 386
+    goarm:
+      - 6
+      - 7
+    flags:
+      - -mod=vendor
+
+dockers:
+- image_templates: 
+  - "spacelocust/{{ .ProjectName }}:{{ .Tag }}"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}"
+  - "spacelocust/{{ .ProjectName }}:latest"
+  dockerfile: Dockerfile
+  use: buildx
+  build_flag_templates:
+  - --platform=linux/amd64
+  - --label=org.opencontainers.image.title={{ .ProjectName }}
+  - --label=org.opencontainers.image.url=https://github.com/Spacelocust/{{ .ProjectName }}
+  - --label=org.opencontainers.image.source=https://github.com/Spacelocust/{{ .ProjectName }}
+  - --label=org.opencontainers.image.version={{ .Version }}
+  - --label=org.opencontainers.image.created={{ .Date }}
+  - --label=org.opencontainers.image.revision={{ .FullCommit }}
+  - --label=org.opencontainers.image.licenses=MIT
+
+- image_templates:
+  - "spacelocust/{{ .ProjectName }}:{{ .Tag }}"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}"
+  - "spacelocust/{{ .ProjectName }}:latest"
+  goarch: arm64
+  dockerfile: Dockerfile
+  use: buildx
+  build_flag_templates:
+  - --platform=linux/arm64/v8
+  - --label=org.opencontainers.image.title={{ .ProjectName }}
+  - --label=org.opencontainers.image.url=https://github.com/Spacelocust/{{ .ProjectName }}
+  - --label=org.opencontainers.image.source=https://github.com/Spacelocust/{{ .ProjectName }}
+  - --label=org.opencontainers.image.version={{ .Version }}
+  - --label=org.opencontainers.image.created={{ .Date }}
+  - --label=org.opencontainers.image.revision={{ .FullCommit }}
+  - --label=org.opencontainers.image.licenses=MIT
+docker_manifests:
+- name_template: spacelocust/{{ .ProjectName }}:{{ .Version }}
+  image_templates:
+  - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
+  - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64v8
+- name_template: spacelocust/{{ .ProjectName }}:latest
+  image_templates:
+  - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
+  - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64v8
+
+release:
+  prerelease: auto
+
+universal_binaries:
+  - replace: true
+
+checksum:
+  name_template: 'checksums.txt'
