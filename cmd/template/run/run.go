@@ -7,6 +7,7 @@ import (
 	"regexp"
 
 	"github.com/Spacelocust/dahl/helper/file"
+	"github.com/Spacelocust/dahl/model"
 
 	"github.com/Spacelocust/dahl/helper/logger"
 	"github.com/Spacelocust/dahl/helper/tool"
@@ -16,16 +17,18 @@ import (
 )
 
 var (
-	from       string
-	to         string
-	filename   string
-	prefix     string
-	suffix     string
-	extension  string
-	properties = map[string]string{}
+	from      string
+	to        string
+	filename  string
+	prefix    string
+	suffix    string
+	extension string
+
+	properties  = map[string]string{}
+	flagsAction = model.FlagsAction{}
 
 	// Regex to check extension set
-	regexExt, _ = regexp.Compile(`\.[a-z]{2,6}$`)
+	regexExt = regexp.MustCompile(`\.[a-z]{2,6}$`)
 )
 
 // runCmd represents the run command
@@ -40,6 +43,15 @@ var RunCmd = &cobra.Command{
 		configTemplate := viper.GetStringMap(template)
 
 		if len(configTemplate) > 0 {
+
+			if isChanged := cmd.Flag("yes").Changed; isChanged {
+				flagsAction.IsYes = true
+			}
+
+			if isChanged := cmd.Flag("force").Changed; isChanged {
+				flagsAction.IsForce = true
+			}
+
 			if err := tool.OverrideConfig(&filename, tool.InterfaceToString(configTemplate["filename"])); err != nil {
 				logger.LogError(err.Error(), "filename")
 			} else {
@@ -76,7 +88,7 @@ var RunCmd = &cobra.Command{
 				properties["prefix"] = prefix
 			}
 
-			if err := file.CreateFile(properties, template); err != nil {
+			if err := file.CreateFile(properties, template, flagsAction); err != nil {
 				logger.LogError(err.Error())
 			}
 
@@ -94,4 +106,7 @@ func init() {
 	RunCmd.Flags().StringVarP(&prefix, "prefix", "p", "", "prefix of filename")
 	RunCmd.Flags().StringVarP(&suffix, "suffix", "s", "", "suffix of filename")
 	RunCmd.Flags().StringVarP(&extension, "extension", "e", "", "extension of filename")
+
+	RunCmd.Flags().BoolP("force", "f", true, "force overwritten on a existing file")
+	RunCmd.Flags().BoolP("yes", "y", true, "shorcut for yes answer for the question for creating a the new path")
 }

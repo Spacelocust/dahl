@@ -7,7 +7,9 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/Spacelocust/dahl/helper/prompt"
 	"github.com/Spacelocust/dahl/helper/tool"
+	"github.com/Spacelocust/dahl/model"
 	"github.com/spf13/viper"
 )
 
@@ -16,7 +18,7 @@ const TEMPLATE_DIR = "./.dahl"
 // Regex to get _{ ... }_ pattern
 var regexPattern = regexp.MustCompile("_\\{\\s*(.*?)\\s*\\}\\_")
 
-func CreateFile(args map[string]string, template string) error {
+func CreateFile(args map[string]string, template string, flagsAction model.FlagsAction) error {
 
 	// Get access to props key from the config template
 	props := viper.Sub(template + ".props")
@@ -71,6 +73,18 @@ func CreateFile(args map[string]string, template string) error {
 	// Content with replaced values
 	newContent := replacer.Replace(string(data))
 
+	// Check if the path directories exist and ask if we make it or not
+	if !flagsAction.IsYes {
+		if isExist, err := tool.Exists(to + "/"); !isExist && err == nil {
+			if err := prompt.YesNo("Path directories doesn't exist, do you want to make it ?", "your file creation has failed", "yes"); err != nil {
+				return err
+			}
+		}
+		if err != nil {
+			return err
+		}
+	}
+
 	// Create all directory(ies) if not presente
 	err = os.MkdirAll(to+"/", os.ModePerm)
 	if err != nil {
@@ -83,6 +97,18 @@ func CreateFile(args map[string]string, template string) error {
 
 	if args["suffix"] != "" {
 		pathTo = pathTo + args["suffix"]
+	}
+
+	// Check if the file all ready exist and ask if we overwritten or not
+	if !flagsAction.IsForce {
+		if isExist, err := tool.Exists(pathTo + extension); isExist && err == nil {
+			if err := prompt.YesNo("File all ready exist, do you want to overwritten it ?", "your file creation has failed", "no"); err != nil {
+				return err
+			}
+		}
+		if err != nil {
+			return err
+		}
 	}
 
 	// Write the updated content back to the file
