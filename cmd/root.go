@@ -5,7 +5,7 @@ import (
 
 	"github.com/Spacelocust/dahl/cmd/stack"
 	"github.com/Spacelocust/dahl/cmd/template"
-	"github.com/Spacelocust/dahl/helper/logger"
+	"github.com/Spacelocust/dahl/utils/logger"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

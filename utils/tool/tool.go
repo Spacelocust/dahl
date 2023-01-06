@@ -1,6 +1,9 @@
 package tool
 
-import "errors"
+import (
+	"errors"
+	"os"
+)
 
 // Replace a config value by a flag value if the flag is set
 func OverrideConfig(flagValue *string, configValue string) error {
@@ -42,4 +45,16 @@ func SSToMap(arr [][]string) map[string]string {
 	}
 
 	return newMap
+}
+
+// Check if a path exist
+func Exists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
 }
