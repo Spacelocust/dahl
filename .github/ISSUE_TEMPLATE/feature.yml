@@ -1,0 +1,28 @@
+name: Feature
+description: Request a new feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Open a new feature to improve the project. Please make sure to check the other issues and that nobody already made such demand.
+  - type: input
+    id: name
+    attributes:
+      label: The name of the feature
+      description: "Give a name, preferably unique, to this new feature!"
+      placeholder: "Add a new command "find"..."
+    validations:
+      required: true
+  - type: textarea
+    id: desc
+    attributes:
+      label: Feature description
+      description: Describe the new feature you want to add.
+    validations:
+      required: true
+  - type: textarea
+    id: info
+    attributes:
+      label: Additional information
+      description: Add anything you feel like is necessary for this feature.
+      render: shell
