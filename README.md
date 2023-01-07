@@ -1,26 +1,17 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/39099403/211023529-5cfebcd6-f822-44e4-85b2-f47ee99f41c0.svg" width="550" alt="Dahl Logo" />
+  <img src="https://user-images.githubusercontent.com/39099403/211157601-cab972ed-085e-4ff6-bb8a-99e4babb9e3c.svg" width="550" alt="Dahl Logo" />
 </p>
 
-![CI](https://github.com/jesseduffield/lazygit/workflows/Continuous%20Integration/badge.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/Spacelocust/dahl)](https://goreportcard.com/report/github.com/Spacelocust/dahl)
-![GitHub repo size](https://img.shields.io/github/repo-size/Spacelocust/dahl)
-[![GitHub Releases](https://img.shields.io/github/downloads/Spacelocust/dahl/total)](https://github.com/Spacelocust/dahl/releases)
-[![GitHub tag](https://img.shields.io/github/tag/Spacelocust/dahl.svg)](https://github.com/Spacelocust/dahl/releases/latest)
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+<p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+<p align="center">
+  <img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" />
+  <img src="https://goreportcard.com/badge/github.com/Spacelocust/dahl" alt="Go Report Card" />
+  <img src="https://img.shields.io/github/license/Spacelocust/dahl" alt="Package License" />
+  <img src="https://img.shields.io/github/repo-size/Spacelocust/dahl">
+  <img src="https://img.shields.io/github/tag/Spacelocust/dahl.svg" alt="GitHub Tag" />
+  <img src="https://img.shields.io/github/downloads/Spacelocust/dahl/total" alt="GitHub Releases">
+  <img src="https://img.shields.io/github/actions/workflow/status/Spacelocust/dahl/cd.yml" alt="GitHub Workflow Status" />
+  <img src="https://coveralls.io/repos/github/Spacelocust/dahl/badge.svg?branch=main" alt="Coverage" />
 </p>
 
 ## Sponsors
@@ -43,12 +34,9 @@ Thank you for checking out Dahl. We hope it becomes a valuable addition to your 
 - [Requirements](https://github.com/jesseduffield/lazydocker#requirements)
 - [Installation](https://github.com/jesseduffield/lazydocker#installation)
 - [Usage](https://github.com/jesseduffield/lazydocker#usage)
-- [Keybindings](/docs/keybindings)
 - [Cool Features](https://github.com/jesseduffield/lazydocker#cool-features)
 - [Contributing](https://github.com/jesseduffield/lazydocker#contributing)
-- [Video Tutorial](https://youtu.be/NICqQPxwJWw)
 - [Config Docs](/docs/Config.md)
-- [Twitch Stream](https://www.twitch.tv/jesseduffield)
 - [FAQ](https://github.com/jesseduffield/lazydocker#faq)
 
 ## Installation
