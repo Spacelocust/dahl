@@ -33,6 +33,8 @@ Thank you for checking out Dahl. We hope it becomes a valuable addition to your 
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Usage](#usage)
+    - [Commands](#commands)
+    - [Examples](#examples)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Support](#support)
@@ -53,6 +55,13 @@ Automated install/update, don't forget to always verify what you're piping into 
 curl https://raw.githubusercontent.com/Spacelocust/dahl/main/scripts/install.sh | bash
 ```
 The script installs downloaded binary to `$HOME/.local/bin` directory by default, but it can be changed by setting `DIR` environment variable.
+
+I already made an alias for zsh if you want:
+
+```
+echo "alias dahl='~/.local/bin/dahl'" >> ~/.zshrc
+```
+(you can substitute .zshrc for whatever rc file you're using)
 
 ### Go
 
@@ -79,9 +88,14 @@ go get github.com/Spacelocust/dahl
 docker run --rm -it -v /your/project/path Spacelocust/dahl
 ```
 
-# Usage
 
-Create a config yml file name **dahl-config.yml** and a directory for template source location name **.dahl**
+## Usage
+In your root project, use the following commande for generating a dahl-config.yml and .dahl directory
+```sh
+dahl init
+```
+
+The dahl-config.yml will grouping all of your template configuration
 ```yml
 ## dahl-config.yml
 templates:
@@ -99,12 +113,35 @@ templates:
       [prop name]:
 ```
 
-# Commands
+### Commands
+
 ```sh
-  dahl []
+## base command
+dahl COMMAND ACTION <template> --FLAGS
 ```
 
-# Example
+```sh
+dahl template run "my-template" 
+```
+
+```sh
+[FLAGS]:
+    -n, --name      # add or overwrite the current name
+    --to            # add or overwrite the current to-path
+    -p, --prefix    # add or overwrite the current prefix
+    -s, --suffix    # add or overwrite the current suffix
+    -e, --extension # add or overwrite the current extension
+    -f, --force     # shorcut to force generation if the file already exist
+    -y, --yes       # shorcut to accept generation of directory path if not exist
+```
+### Template
+
+| **pattern**    | **description**      |
+|----------------|----------------------|
+|  \_{ value }\_ | related to file keys |
+| \_{ @value }\_ | custom props keys    |
+
+### Examples
 ```yml
 ## dahl-config.yml
 templates:
@@ -132,13 +169,6 @@ export const update_{ filename }_ = (req, res) => {
 }
 ```
 
-I already made an alias for zsh if you want:
-
-```
-echo "alias dahl='~/.local/bin/dahl'" >> ~/.zshrc
-```
-(you can substitute .zshrc for whatever rc file you're using)
-
 # Roadmap
 
 See the [open issues](https://github.com/Spacelocust/dahl/issues) for a list of proposed features (and known issues).
@@ -162,19 +192,20 @@ Answer 1
 
 Answer 2
 
-# Support
+## Support
 
 Reach out to the maintainer at one of the following places:
 
 - [GitHub discussions](https://github.com/Spacelocust/dahl/discussions)
 - The email which is located [in GitHub profile](https://github.com/Spacelocust)
 
-# License
+## License
 
 This project is licensed under the **MIT license**.
 
 See [LICENSE](LICENSE) for more information.
 
-# Acknowledgements
+## Acknowledgements
 
- - [lazydocker](https://github.com/jesseduffield/lazydocker)
+ - [lazydocker](https://github.com/jesseduffield/lazydocker) - File structuration
+ - [docker](https://docs.docker.com/engine/reference/commandline/docker) - Command-line architecture
