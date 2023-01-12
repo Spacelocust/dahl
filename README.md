@@ -31,7 +31,7 @@ Whether you're a seasoned developer or just starting out, Dahl is a valuable too
 Thank you for checking out Dahl. We hope it becomes a valuable addition to your toolkit.
 
 - [Getting Started](#getting-started)
-  - [Installation](link)
+  - [Installation](#installation)
   - [Usage](#usage)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
@@ -80,6 +80,57 @@ docker run --rm -it -v /your/project/path Spacelocust/dahl
 ```
 
 # Usage
+
+Create a config yml file name **dahl-config.yml** and a directory for template source location name **.dahl**
+```yml
+## dahl-config.yml
+templates:
+
+  ## list template
+  [template name]:
+    to: # destination path of generating file
+    from: # location path of template file
+    filename: # filename of generating file
+    prefix: # prefix filename
+    suffix: # suffix filename
+    
+    ## list props (custom keys)
+    props:
+      [prop name]:
+```
+
+# Commands
+```sh
+  dahl []
+```
+
+# Example
+```yml
+## dahl-config.yml
+templates:
+
+  express-controller:
+    to: "./src/controller"
+    from: "/express/controller/my-controller.dahl"
+    props:
+      http:
+        status: 
+          ok: 200
+```
+
+```javascript
+// my-controller.dahl
+
+export const get_{ filename }_ = (req, res) => {
+  // stuff
+  return res.status(_{ @http.status.ok }_).send()
+}
+
+export const update_{ filename }_ = (req, res) => {
+  // stuff
+  return res.status(_{ @http.status.ok }_).send()
+}
+```
 
 I already made an alias for zsh if you want:
 
