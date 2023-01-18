@@ -1,7 +1,9 @@
 package tool
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
 )
 
@@ -57,4 +59,31 @@ func Exists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+// Format a Json Object string to a Map
+func JsonToMap(s string) (map[string]interface{}, error) {
+	var val map[string]interface{}
+
+	if err := json.Unmarshal([]byte(s), &val); err != nil {
+		return make(map[string]interface{}), err
+	}
+
+	return val, nil
+}
+
+func FindInMap(array map[string]interface{}, path []string) (interface{}, error) {
+	if val, ok := array[path[0]]; ok {
+		if len(path) > 1 {
+			if val, ok := val.(map[string]interface{}); ok {
+				return FindInMap(val, path[1:])
+			}
+
+			return "", errors.New("value not iterable")
+		}
+
+		return val, nil
+	}
+
+	return "", errors.New(fmt.Sprintln(path[0], "not found"))
 }
