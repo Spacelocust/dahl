@@ -6,7 +6,10 @@ import (
 	"strings"
 )
 
-// Show a Yes No prompt
+// YesNo() parameters:
+//	- `s` : question show when the function is triggered
+// 	- `errMsg` : error show when answer is No
+// 	- `def` : default answer (true: "Yes", false: "No")
 func YesNo(s string, errMsg string, def ...bool) error {
 	var (
 		response   string
