@@ -41,7 +41,7 @@ var RunCmd = &cobra.Command{
 
 		if len(args) > 0 {
 			if err := viper.ReadInConfig(); err != nil {
-				logger.LogError(".dahl-config.yml file not found", viper.ConfigFileUsed())
+				logger.LogError(err.Error(), viper.ConfigFileUsed())
 			}
 
 			pathYml := "templates." + args[0]
@@ -150,16 +150,6 @@ func withConfig(configYml map[string]interface{}) {
 		template.Prefix = prefix
 	}
 }
-
-/*func flagSetting(template *model.Template, flagValue string, key string, config map[string]interface{}, optional bool) {
-	if err := tool.OverrideConfig(&flagValue, tool.InterfaceToString(config[key])); err == nil {
-		model.SetValue(&template, key, flagValue)
-	} else {
-		if !optional {
-			logger.LogError(err.Error(), key)
-		}
-	}
-}*/
 
 func init() {
 	RunCmd.Flags().StringVarP(&filename, "filename", "n", "", "")
