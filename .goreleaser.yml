@@ -53,15 +53,6 @@ dockers:
   - --label=org.opencontainers.image.created={{ .Date }}
   - --label=org.opencontainers.image.revision={{ .FullCommit }}
   - --label=org.opencontainers.image.licenses=MIT
-docker_manifests:
-- name_template: spacelocust/{{ .ProjectName }}:{{ .Version }}
-  image_templates:
-  - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
-  - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64v8
-- name_template: spacelocust/{{ .ProjectName }}:latest
-  image_templates:
-  - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
-  - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64v8
 
 release:
   prerelease: auto
