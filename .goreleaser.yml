@@ -20,7 +20,6 @@ builds:
 
 dockers:
 - image_templates: 
-  - "spacelocust/{{ .ProjectName }}:{{ .Tag }}"
   - "spacelocust/{{ .ProjectName }}:{{ .Major }}"
   - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}"
   - "spacelocust/{{ .ProjectName }}:latest"
@@ -37,7 +36,6 @@ dockers:
   - --label=org.opencontainers.image.licenses=MIT
 
 - image_templates:
-  - "spacelocust/{{ .ProjectName }}:{{ .Tag }}"
   - "spacelocust/{{ .ProjectName }}:{{ .Major }}"
   - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}"
   - "spacelocust/{{ .ProjectName }}:latest"
