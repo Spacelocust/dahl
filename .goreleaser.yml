@@ -13,6 +13,7 @@ builds:
       - arm
       - 386
     goarm:
+      - 6
       - 7
     flags:
       - -mod=vendor
