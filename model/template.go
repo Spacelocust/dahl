@@ -28,10 +28,7 @@ type Template struct {
 	FlagsAction FlagsAction
 }
 
-const (
-	TEMPLATE_DIR = "./.dahl"
-	REGEX        = `\_{\s*(\S+)\s*\}_` // "_\\{\\s*(.*?)\\s*\\}\\_"
-)
+const REGEX = `\_{\s*(\S+)\s*\}_` // "_\\{\\s*(.*?)\\s*\\}\\_"
 
 // Regex to get _{ ... }_ pattern
 var regexPattern = regexp.MustCompile(REGEX)
@@ -46,7 +43,7 @@ func (template Template) CreateFile() error {
 	pathTo := template.To + "/" + template.Filename
 
 	// Read a template file
-	data, err := os.ReadFile(TEMPLATE_DIR + template.From)
+	data, err := os.ReadFile(template.From)
 	if err != nil {
 		return err
 	}

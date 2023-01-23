@@ -3,6 +3,7 @@ package cmd
 import (
 	"os"
 
+	initial "github.com/Spacelocust/dahl/cmd/init"
 	"github.com/Spacelocust/dahl/cmd/run"
 
 	"github.com/spf13/cobra"
@@ -26,6 +27,7 @@ func init() {
 	cobra.OnInitialize(initConfig)
 
 	rootCmd.AddCommand(run.RunCmd)
+	rootCmd.AddCommand(initial.InitCmd)
 }
 
 func initConfig() {
