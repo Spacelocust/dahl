@@ -12,6 +12,11 @@ import (
 	"github.com/spf13/viper"
 )
 
+type Props struct {
+	JsonData string
+	PathYml  *viper.Viper
+}
+
 type Template struct {
 	From        string
 	To          string
@@ -19,14 +24,11 @@ type Template struct {
 	Prefix      string
 	Suffix      string
 	Extension   string
+	Props       Props
 	FlagsAction FlagsAction
-	Props       *viper.Viper
 }
 
-const (
-	TEMPLATE_DIR = "./.dahl"
-	REGEX        = `\_{\s*(\S+)\s*\}_` // "_\\{\\s*(.*?)\\s*\\}\\_"
-)
+const REGEX = `\_{\s*(\S+)\s*\}_` // "_\\{\\s*(.*?)\\s*\\}\\_"
 
 // Regex to get _{ ... }_ pattern
 var regexPattern = regexp.MustCompile(REGEX)
@@ -41,17 +43,31 @@ func (template Template) CreateFile() error {
 	pathTo := template.To + "/" + template.Filename
 
 	// Read a template file
-	data, err := os.ReadFile(TEMPLATE_DIR + template.From)
+	data, err := os.ReadFile(template.From)
 	if err != nil {
 		return err
 	}
 
-	// Get a Map of ["_{ ... }_"]: ... from a template
-	arrMatch := tool.SSToMap(regexPattern.FindAllStringSubmatch(string(data), -1))
 
-	for k, v := range arrMatch {
-		value, err := GetValue(template, v)
-		if err == nil {
+	// TODO: refactor this part to be more clean
+	var jsonMap map[string]interface{}
+	if template.Props.JsonData != "" {
+		// Convert json object to a map
+		val, err := tool.JsonToMap(template.Props.JsonData)
+		if err != nil {
+			return err
+		}
+
+		jsonMap = val
+	}
+
+	// Get a Map of pair: [["_{ value }_"]: value] from a template
+	matchs := tool.SSToMap(regexPattern.FindAllStringSubmatch(string(data), -1))
+
+	// k: _{ value }_ , v: value
+	var foundVal interface{}
+	for k, v := range matchs {
+		if value, err := GetValue(template, v); err == nil {
 			properties = append(properties, k, value)
 		} else {
 			// Check if the pattern contain a "@" like _{ @value }_
@@ -59,10 +75,31 @@ func (template Template) CreateFile() error {
 				v = strings.Replace(v, "@", "", 1)
 			}
 
-			if prop := template.Props.GetString(v); prop != "" {
-				properties = append(properties, k, prop)
+			if len(jsonMap) > 0 {
+				// Get value from jsonMap with the value pattern from the template
+				val, _ := tool.FindInMap(jsonMap, strings.Split(v, "."))
+				foundVal = val
+			}
+
+
+			// TODO: refactor this part to be more clean
+			if template.Props.PathYml != nil {
+				if prop := template.Props.PathYml.GetString(v); prop != "" {
+					// Replace the value from the configYml with the value from the jsonMap
+					if foundVal != nil && foundVal.(string) != "" {
+						properties = append(properties, k, foundVal.(string))
+					} else {
+						properties = append(properties, k, prop)
+					}
+				} else {
+					errString = fmt.Sprint(errString, k+", ")
+				}
 			} else {
-				errString = fmt.Sprint(errString, k+", ")
+				if foundVal != nil && foundVal.(string) != "" {
+					properties = append(properties, k, foundVal.(string))
+				} else {
+					errString = fmt.Sprint(errString, k+", ")
+				}
 			}
 		}
 	}
@@ -103,10 +140,10 @@ func (template Template) CreateFile() error {
 		pathTo = pathTo + template.Suffix
 	}
 
-	// Check if the file all ready exist and ask if we overwritten or not
+	// Check if the file already exist and ask if we overwritten or not
 	if !template.FlagsAction.IsForce {
 		if isExist, err := tool.Exists(pathTo + template.Extension); isExist && err == nil {
-			if err := prompt.YesNo("File all ready exist, do you want to overwritten it ?", "your file creation has failed", false); err != nil {
+			if err := prompt.YesNo("File already exist, do you want to overwritten it ?", "your file creation has failed", false); err != nil {
 				return err
 			}
 		}

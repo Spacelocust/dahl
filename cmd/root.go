@@ -3,9 +3,8 @@ package cmd
 import (
 	"os"
 
-	"github.com/Spacelocust/dahl/cmd/stack"
-	"github.com/Spacelocust/dahl/cmd/template"
-	"github.com/Spacelocust/dahl/utils/logger"
+	initial "github.com/Spacelocust/dahl/cmd/init"
+	"github.com/Spacelocust/dahl/cmd/run"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -27,16 +26,12 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.AddCommand(stack.StackCmd)
-	rootCmd.AddCommand(template.TemplateCmd)
+	rootCmd.AddCommand(run.RunCmd)
+	rootCmd.AddCommand(initial.InitCmd)
 }
 
 func initConfig() {
 	viper.AddConfigPath(".")
 	viper.SetConfigType("yaml")
-	viper.SetConfigName("dahl-config")
-
-	if err := viper.ReadInConfig(); err != nil {
-		logger.LogError("dahl-config file not found", viper.ConfigFileUsed())
-	}
+	viper.SetConfigName(".dahl-config")
 }
