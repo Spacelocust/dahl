@@ -39,7 +39,6 @@ Thank you for checking out Dahl. We hope it becomes a valuable addition to your 
 - [Contributing](#contributing)
 - [Support](#support)
 - [License](#license)
-- [FAQ](#faq)
 - [Acknowledgements](#acknowledgements)
 
 # Getting Started
@@ -94,6 +93,10 @@ In your root project, use the following commande for generating a dahl-config.ym
 ```sh
 dahl init
 ```
+Use hello world flag if you want a example template and configuration
+```sh
+dahl init --hello-world
+```
 
 The dahl-config.yml will grouping all of your template configuration
 ```yml
@@ -117,16 +120,17 @@ templates:
 
 ```sh
 ## base command
-dahl COMMAND ACTION <template> --FLAGS
+dahl ACTION <template> --FLAGS
 ```
 
 ```sh
-dahl template run "my-template" 
+dahl run "my-template" 
 ```
 
 ```sh
 [FLAGS]:
     -n, --name      # add or overwrite the current name
+    --from          # add or overwrite the current name
     --to            # add or overwrite the current to-path
     -p, --prefix    # add or overwrite the current prefix
     -s, --suffix    # add or overwrite the current suffix
@@ -181,16 +185,6 @@ See the [open issues](https://github.com/Spacelocust/dahl/issues) for a list of 
 
 There is still a lot of work to go! Please check out the [contributing guide](CONTRIBUTING.md).
 For contributor discussion about things not better discussed here in the repo, join the discord channel
-
-# FAQ
-
-### Question 1
-
-Answer 1
-
-### Question 2
-
-Answer 2
 
 ## Support
 
