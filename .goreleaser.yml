@@ -74,12 +74,22 @@ dockers:
   - --label=org.opencontainers.image.licenses=MIT
 
 docker_manifests:
+  - name_template: spacelocust/{{ .ProjectName }}:latest
+    image_templates:
+    - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
+    - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64
+    - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm
   - name_template: spacelocust/{{ .ProjectName }}:{{ .Version }}
     image_templates:
     - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
     - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64
     - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm
-  - name_template: spacelocust/{{ .ProjectName }}:latest
+  - name_template: spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}
+    image_templates:
+    - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
+    - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64
+    - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm
+  - name_template: spacelocust/{{ .ProjectName }}:{{ .Major }}
     image_templates:
     - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
     - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64
