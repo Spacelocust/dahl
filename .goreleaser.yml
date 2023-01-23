@@ -13,7 +13,6 @@ builds:
       - arm
       - 386
     goarm:
-      - 6
       - 7
     flags:
       - -mod=vendor
@@ -86,14 +85,14 @@ docker_manifests:
     - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm
   - name_template: spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}
     image_templates:
-    - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
-    - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64
-    - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm
+    - spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}-amd64
+    - spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}-arm64
+    - spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}-arm
   - name_template: spacelocust/{{ .ProjectName }}:{{ .Major }}
     image_templates:
-    - spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64
-    - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64
-    - spacelocust/{{ .ProjectName }}:{{ .Version }}-arm
+    - spacelocust/{{ .ProjectName }}:{{ .Major }}-amd64
+    - spacelocust/{{ .ProjectName }}:{{ .Major }}-arm64
+    - spacelocust/{{ .ProjectName }}:{{ .Major }}-arm
 
 release:
   prerelease: auto
