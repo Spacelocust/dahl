@@ -20,9 +20,9 @@ builds:
 
 dockers:
 - image_templates: 
-  - "spacelocust/{{ .ProjectName }}:{{ .Major }}"
-  - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}"
-  - "spacelocust/{{ .ProjectName }}:{{ .Version }}"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}-amd64"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}-amd64"
+  - "spacelocust/{{ .ProjectName }}:{{ .Version }}-amd64"
   - "spacelocust/{{ .ProjectName }}:latest"
   goarch: amd64
   dockerfile: Dockerfile
@@ -38,9 +38,9 @@ dockers:
   - --label=org.opencontainers.image.licenses=MIT
 
 - image_templates:
-  - "spacelocust/{{ .ProjectName }}:{{ .Major }}"
-  - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}"
-  - "spacelocust/{{ .ProjectName }}:{{ .Version }}"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}-arm64"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}-arm64"
+  - "spacelocust/{{ .ProjectName }}:{{ .Version }}-arm64"
   - "spacelocust/{{ .ProjectName }}:latest"
   goarch: arm64
   dockerfile: Dockerfile
@@ -56,9 +56,9 @@ dockers:
   - --label=org.opencontainers.image.licenses=MIT
 
 - image_templates:
-  - "spacelocust/{{ .ProjectName }}:{{ .Major }}"
-  - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}"
-  - "spacelocust/{{ .ProjectName }}:{{ .Version }}"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}-arm"
+  - "spacelocust/{{ .ProjectName }}:{{ .Major }}.{{ .Minor }}-arm"
+  - "spacelocust/{{ .ProjectName }}:{{ .Version }}-arm"
   - "spacelocust/{{ .ProjectName }}:latest"
   goarch: arm
   dockerfile: Dockerfile
