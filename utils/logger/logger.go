@@ -7,7 +7,7 @@ import (
 
 const (
 	ERROR   = "[Error]: "
-	SUCCESS = "[Sucess]: "
+	SUCCESS = "[Success]: "
 )
 
 func logger(typeLog string) {
