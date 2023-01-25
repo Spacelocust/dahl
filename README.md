@@ -81,10 +81,10 @@ go get github.com/Spacelocust/dahl
 [![Docker Pulls](https://img.shields.io/docker/pulls/spacelocust/dahl)](https://hub.docker.com/r/spacelocust/dahl)
 [![Docker Stars](https://img.shields.io/docker/stars/spacelocust/dahl)](https://hub.docker.com/r/spacelocust/dahl)
 [![Docker Automated](https://img.shields.io/docker/cloud/automated/spacelocust/dahl)](https://hub.docker.com/r/spacelocust/dahl)
-![Docker Image Version](https://img.shields.io/docker/v/spacelocust/dalh/latest)
+[![Docker Image Version](https://img.shields.io/docker/v/spacelocust/dahl?arch=arm64&sort=date)](https://hub.docker.com/r/spacelocust/dahl)
 
 ```sh
-docker run --rm -it -v /your/project/path Spacelocust/dahl
+docker run --rm -it -v /your/project/path:/app -w /app spacelocust/dahl:latest
 ```
 
 
@@ -93,7 +93,7 @@ In your root project, use the following commande for generating a dahl-config.ym
 ```sh
 dahl init
 ```
-Use hello world flag if you want a example template and configuration
+Use **hello-world** flag if you want a example template and configuration
 ```sh
 dahl init --hello-world
 ```
@@ -120,24 +120,34 @@ templates:
 
 ```sh
 ## base command
-dahl ACTION <template> --FLAGS
+dahl [command] [template] [flags]
 ```
 
-```sh
-dahl run "my-template" 
-```
+You can use flags to overwrite some value from the config file, like filename, destination...
 
 ```sh
-[FLAGS]:
-    -n, --name      # add or overwrite the current name
-    --from          # add or overwrite the current name
-    --to            # add or overwrite the current to-path
-    -p, --prefix    # add or overwrite the current prefix
-    -s, --suffix    # add or overwrite the current suffix
-    -e, --extension # add or overwrite the current extension
-    -f, --force     # shorcut to force generation if the file already exist
-    -y, --yes       # shorcut to accept generation of directory path if not exist
+Flags:
+    -n, --filename   (string)
+    --from           (string)  
+    --to             (string)
+    --props          (json)
+    -p, --prefix     (string)
+    -s, --suffix     (string)
+    -e, --extension  (string)
+    -f, --force
+    -y, --yes
 ```
+**"Filename, From, To"** value are required, you must specify them with the cli or config file.
+
+**Info**: the config file isn't required, you can use templating with the cli this way:
+
+```sh
+dahl run 
+  --from /my/template/path 
+  --to /my/destination/path
+  --filename my-file
+```
+
 ### Template
 
 | **pattern**    | **description**      |
@@ -146,6 +156,11 @@ dahl run "my-template"
 | \_{ @value }\_ | custom props keys    |
 
 ### Examples
+
+```sh
+dahl run express-controller -n User
+```
+
 ```yml
 ## dahl-config.yml
 templates:
@@ -153,6 +168,7 @@ templates:
   express-controller:
     to: "./src/controller"
     from: "/express/controller/my-controller.dahl"
+    extension: ".js"
     props:
       http:
         status: 
