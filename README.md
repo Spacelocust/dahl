@@ -81,7 +81,7 @@ go get github.com/Spacelocust/dahl
 [![Docker Pulls](https://img.shields.io/docker/pulls/spacelocust/dahl)](https://hub.docker.com/r/spacelocust/dahl)
 [![Docker Stars](https://img.shields.io/docker/stars/spacelocust/dahl)](https://hub.docker.com/r/spacelocust/dahl)
 [![Docker Automated](https://img.shields.io/docker/cloud/automated/spacelocust/dahl)](https://hub.docker.com/r/spacelocust/dahl)
-[![Docker Image Version](https://img.shields.io/docker/v/spacelocust/dahl?arch=arm64&sort=date)](https://hub.docker.com/r/spacelocust/dahl)
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/spacelocust/dahl?sort=semver)](https://hub.docker.com/repository/docker/spacelocust/dahl/tags?page=1&ordering=last_updated)
 
 ```sh
 docker run --rm -it -v /your/project/path:/app -w /app spacelocust/dahl:latest
