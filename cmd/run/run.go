@@ -33,8 +33,8 @@ var (
 
 // runCmd represents the run command
 var RunCmd = &cobra.Command{
-	Use:   "run",
-	Short: "run template",
+	Use:   "run [template]",
+	Short: "Generate file from a template",
 	Args:  cobra.RangeArgs(0, 1),
 	Run: func(cmd *cobra.Command, args []string) {
 		template.Props = model.Props{}

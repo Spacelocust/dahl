@@ -5,41 +5,20 @@ import (
 
 	"github.com/Spacelocust/dahl/utils/logger"
 	"github.com/Spacelocust/dahl/utils/tool"
+	"github.com/Spacelocust/dahl/template"
 	"github.com/spf13/cobra"
 )
 
-const configFile  = ".dahl-config.yml"
+const configFile = ".dahl-config.yml"
 
 var (
 	dirTemplate = "./.dahl/"
-	configFileTemp =
-`## Example template 
-
-templates:
- example:
-  filename: "hello-world"
-  from: "./.dahl/example/hello-world.dahl"
-  to: "."
-  extension: ".txt"
-  props:
-   message: "Hello and welcome "
-   emoji:
-    wink: ";)"
-    smile: ":D"
-`
-	helloWorldTemp =
-`_{ @message }__{ @emoji.smile }_
-
-This is a template file example, named: "_{ filename }__{ extension }_"
-
-More info at https://github.com/Spacelocust/dahl/blob/main/README.md _{ @emoji.wink }_
-`
+	configFileTemp = template.ConfigFile
 )
 
 var InitCmd = &cobra.Command{
 	Use:   "init",
-	Short: "Commands relative to init",
-	Long:  `init`,
+	Short: "Generate directory template and configuration file",
 	Run: func(cmd *cobra.Command, args []string) {
 		isHello := false
 
@@ -71,7 +50,7 @@ var InitCmd = &cobra.Command{
 
 			if isHello {
 				// Create a hello-world.dahl at ./.dahl/example/
-				err = os.WriteFile(dirTemplate + "hello-world.dahl", []byte(helloWorldTemp), 0666)
+				err = os.WriteFile(dirTemplate+"hello-world.dahl", []byte(template.HelloWorld), 0666)
 				if err != nil {
 					logger.LogError(err.Error())
 				}
