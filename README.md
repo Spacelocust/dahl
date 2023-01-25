@@ -4,13 +4,13 @@
 
 <p align="center">A Simple CLI made with <a href="https://github.com/spf13/cobra" target="_blank">Cobra</a> package for generating files.</p>
 <p align="center">
-  <img src="https://img.shields.io/github/go-mod/go-version/Spacelocust/dahl" alt="GitHub go.mod Go version">
+  <img src="https://img.shields.io/github/go-mod/go-version/spacelocust/dahl" alt="GitHub go.mod Go version">
   <img src="https://goreportcard.com/badge/github.com/Spacelocust/dahl" alt="Go Report Card" />
-  <img src="https://img.shields.io/github/license/Spacelocust/dahl" alt="Package License" />
-  <img src="https://img.shields.io/github/repo-size/Spacelocust/dahl" alt="GitHub repo size">
-  <img src="https://img.shields.io/github/v/tag/Spacelocust/dahl" alt="GitHub Tag" />
-  <img src="https://img.shields.io/github/downloads/Spacelocust/dahl/total" alt="GitHub Releases">
-  <img src="https://img.shields.io/github/actions/workflow/status/Spacelocust/dahl/cd.yml" alt="GitHub Workflow Status" />
+  <img src="https://img.shields.io/github/actions/workflow/status/spacelocust/dahl/cd.yml" alt="GitHub Workflow Status" />
+  <img src="https://img.shields.io/github/license/spacelocust/dahl" alt="Package License" />
+  <img src="https://img.shields.io/github/repo-size/spacelocust/dahl" alt="GitHub repo size">
+  <img src="https://img.shields.io/github/v/tag/spacelocust/dahl" alt="GitHub Tag" />
+  <img src="https://img.shields.io/github/downloads/spacelocust/dahl/total" alt="GitHub Releases">
 </p>
 
 # Sponsors
