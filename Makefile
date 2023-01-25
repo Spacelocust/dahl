@@ -16,3 +16,6 @@ go-no-conf:
 .PHONY: c
 go-cmd:
 	${RUN} run go-cmd -n ${c} --to ./cmd/${c}
+
+go-dahl:
+	${RUN} ${c}
