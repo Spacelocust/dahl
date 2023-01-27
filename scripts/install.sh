@@ -21,7 +21,13 @@ GITHUB_URL="https://github.com/Spacelocust/dahl/releases/download/${GITHUB_LATES
 # install/update the local binary
 curl -L -o dahl.tar.gz $GITHUB_URL
 tar -xzvf dahl.tar.gz dahl
-install -Dm 755 dahl -t "$DIR"
+
+if [ "$(uname -s)" == "Darwin" ]; then
+    cp dahl "$DIR" && chmod 755 "$DIR/dahl"
+else
+    install -Dm 755 dahl -t "$DIR"
+fi
+
 rm dahl dahl.tar.gz
 
 echo "dahl installation complete !"
