@@ -17,21 +17,6 @@ builds:
       - 7
     flags:
       - -mod=vendor
-    ldflags:
-      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}} -X main.buildSource=binaryRelease
-
-archives:
-  - builds:
-      - binary
-    replacements:
-      darwin: Darwin
-      linux: Linux
-      windows: Windows
-      386: x86
-      amd64: x86_64
-    format_overrides:
-      - goos: windows
-        format: zip
 
 dockers:
 - image_templates: 
@@ -112,9 +97,6 @@ docker_manifests:
 
 release:
   prerelease: auto
-
-universal_binaries:
-  - replace: true
 
 checksum:
   name_template: 'checksums.txt'
