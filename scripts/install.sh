@@ -23,7 +23,7 @@ curl -L -o dahl.tar.gz $GITHUB_URL
 tar -xzvf dahl.tar.gz dahl
 
 if [ "$(uname -s)" == "Darwin" ]; then
-    cp dahl "$DIR" && chmod 755 "$DIR/dahl"
+    mkdir -p "$DIR" && cp dahl "$DIR" && chmod 755 "$DIR/dahl"
 else
     install -Dm 755 dahl -t "$DIR"
 fi
