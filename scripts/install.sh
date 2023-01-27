@@ -10,6 +10,7 @@ case $ARCH in
     armv6*) ARCH=armv6 ;;
     armv7*) ARCH=armv7 ;;
     aarch64*) ARCH=arm64 ;;
+    x86_64*) ARCH=amd64 ;;
 esac
 
 # prepare the download URL
