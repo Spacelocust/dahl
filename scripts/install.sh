@@ -14,7 +14,7 @@ esac
 
 # prepare the download URL
 GITHUB_LATEST_VERSION=$(curl -L -s -H 'Accept: application/json' https://github.com/Spacelocust/dahl/releases/latest | sed -e 's/.*"tag_name":"\([^"]*\)".*/\1/')
-GITHUB_FILE="lazydocker_${GITHUB_LATEST_VERSION//v/}_$(uname -s)_${ARCH}.tar.gz"
+GITHUB_FILE="dahl_${GITHUB_LATEST_VERSION//v/}_$(uname -s)_${ARCH}.tar.gz"
 GITHUB_URL="https://github.com/Spacelocust/dahl/releases/download/${GITHUB_LATEST_VERSION}/${GITHUB_FILE}"
 
 # install/update the local binary
